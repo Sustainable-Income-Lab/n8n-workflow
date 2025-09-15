@@ -1,0 +1,265 @@
+{
+  "createdAt": "2025-09-15T09:02:58.319Z",
+  "updatedAt": "2025-09-15T09:23:03.805Z",
+  "id": "LdS7g6o2z2tL5G4L",
+  "name": "github-文案",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "filters": {
+          "tags": "=文案"
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        96
+      ],
+      "id": "e13c6989-f333-40f4-bfed-a77ad1bfbeea",
+      "name": "n8n",
+      "credentials": {
+        "n8nApi": {
+          "id": "8sJazoUR3jLpgjTv",
+          "name": "115B n8n API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/Sustainable-Income-Lab",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-workflow",
+          "mode": "list",
+          "cachedResultName": "n8n-workflow",
+          "cachedResultUrl": "https://github.com/Sustainable-Income-Lab/n8n-workflow"
+        },
+        "filePath": "=文案/{{ $json.id }}.json",
+        "fileContent": "={{JSON.stringify($json, null, 2)}}",
+        "commitMessage": "=「{{ $json.name }}」｜最後更新於 {{ $json.updatedAt }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        -128,
+        -48
+      ],
+      "id": "0495acda-806d-4e8d-a06e-f7d440cc7616",
+      "name": "GitHub1",
+      "webhookId": "43b8ff7d-a277-494d-8ff9-a57167f103c0",
+      "credentials": {
+        "githubApi": {
+          "id": "eHVRI5P1pP3x20eg",
+          "name": "GitHub Huanry"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/Sustainable-Income-Lab",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-workflow",
+          "mode": "list",
+          "cachedResultName": "n8n-workflow",
+          "cachedResultUrl": "https://github.com/Sustainable-Income-Lab/n8n-workflow"
+        },
+        "filePath": "=文案/{{ $('n8n').item.json.id }}.json",
+        "fileContent": "={{JSON.stringify($('n8n').item.json, null, 2)}}",
+        "commitMessage": "=「{{ $('n8n').item.json.name }}」｜最後更新於 {{ $('n8n').item.json.updatedAt }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        96
+      ],
+      "id": "4ace387d-aa70-4452-ab04-088f2b1df0ae",
+      "name": "GitHub2",
+      "webhookId": "43b8ff7d-a277-494d-8ff9-a57167f103c0",
+      "credentials": {
+        "githubApi": {
+          "id": "eHVRI5P1pP3x20eg",
+          "name": "GitHub Huanry"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dee2646d-5ac5-49d3-a5ad-e9717e2349dc",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        96,
+        16
+      ],
+      "id": "85b60081-effb-4c78-9c6f-65c609ba517f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -352,
+        96
+      ],
+      "id": "874f3daa-2fc5-4e3f-bee5-bf75174d6cf6",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        96
+      ],
+      "id": "ea7b44aa-005e-49bf-b4f8-ae8ee5736ff4",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "connections": {
+    "n8n": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "GitHub2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "GitHub1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "8426020f-cf61-453c-847f-bcf93df062b3",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-09-15T09:02:58.319Z",
+      "updatedAt": "2025-09-15T09:02:58.319Z",
+      "role": "workflow:owner",
+      "workflowId": "LdS7g6o2z2tL5G4L",
+      "projectId": "cDecO21or5jBIoFx"
+    }
+  ],
+  "tags": [
+    {
+      "createdAt": "2025-09-15T09:02:03.147Z",
+      "updatedAt": "2025-09-15T09:02:03.147Z",
+      "id": "QoDPLz3AuHiTgnik",
+      "name": "文案"
+    }
+  ]
+}
