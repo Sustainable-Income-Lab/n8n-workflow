@@ -1,0 +1,212 @@
+{
+  "createdAt": "2025-09-10T05:18:55.002Z",
+  "updatedAt": "2025-09-15T09:02:04.759Z",
+  "id": "SI4QX9qa81vKhOCg",
+  "name": "新版-RAG-心智元簡介-Gemini",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        -80
+      ],
+      "id": "aced6759-eb83-4095-8e92-428eb08044da",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1fkYuhIjGPl4vSyiMPDdu66opGWfySAf-d0735YOMQSE",
+          "mode": "list",
+          "cachedResultName": "心智元簡介-Slack-NotebookLM-Brian版",
+          "cachedResultUrl": "https://docs.google.com/document/d/1fkYuhIjGPl4vSyiMPDdu66opGWfySAf-d0735YOMQSE/edit?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -256,
+        -80
+      ],
+      "id": "57fa0501-e631-4320-bd85-b0134604bc25",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "dCZF9Bp5QQZlyGwB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        -48,
+        -80
+      ],
+      "id": "05d0293f-46ab-4525-a0ee-8c62367e2991",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "296yvGvkh5Dqjd4S",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        160,
+        144
+      ],
+      "id": "f9e69b63-b301-4bec-b58c-f42bf8b68dd0",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 700,
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        272,
+        352
+      ],
+      "id": "4ee1c811-b4cf-494c-884e-5ed67869e1e4",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        32,
+        144
+      ],
+      "id": "5cd1bb9d-1be5-40cc-b968-ba24dc324a88",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "5u4RJ2yZTBePGydq",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "4c1974f2-75fd-4b0f-b910-c094837bdbd8",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-09-10T05:18:55.002Z",
+      "updatedAt": "2025-09-10T05:18:55.002Z",
+      "role": "workflow:owner",
+      "workflowId": "SI4QX9qa81vKhOCg",
+      "projectId": "cDecO21or5jBIoFx"
+    }
+  ],
+  "tags": [
+    {
+      "createdAt": "2025-05-06T02:51:32.519Z",
+      "updatedAt": "2025-05-06T02:51:32.519Z",
+      "id": "5YNFVqn2LgcpBeHs",
+      "name": "知識庫"
+    },
+    {
+      "createdAt": "2025-09-15T09:02:03.147Z",
+      "updatedAt": "2025-09-15T09:02:03.147Z",
+      "id": "QoDPLz3AuHiTgnik",
+      "name": "文案"
+    }
+  ]
+}
