@@ -1,0 +1,180 @@
+{
+  "createdAt": "2025-09-12T08:05:45.044Z",
+  "updatedAt": "2025-09-16T07:03:10.850Z",
+  "id": "J0uyFkZjYMtA6Tt0",
+  "name": "FB",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -16
+      ],
+      "id": "3784239c-8c64-4a40-9119-695f0c703249",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
+          "mode": "list",
+          "cachedResultName": "文案主題規劃表",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "工作表1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "確認使用"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        16,
+        -48
+      ],
+      "id": "8274f8bd-8485-4ced-b9d0-e9eec5eac3eb",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ThMzRXqGlQiD6SlA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "me",
+        "edge": "feed",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "🌟 永續活動報報200期  下週從公民科學、永續發展到國際情勢，各種精彩的講座、工作坊和映演活動等你參與！無論是關心環境、人權、科技還是文化，都能找到屬於你的靈感交流場域～    📅 9月16日（二）   📖 療癒文學系列講座：《長日將盡》裡的科學史與博物學   👉 reurl.cc/K9L1Kj    📅 9月18日（四）   🌐 邁向我們永恆的星球：健康、科技與地球共生   👉 reurl.cc/9nLkdV   🌍 Global Taipei Dialogue XXVII：美台關稅新局面的挑戰與機會   👉 reurl.cc/89LarR    📅 9月19日（五）   🚺 女力覺醒 × 永續行動：從2030 SDGs桌遊看女力影響力   👉 reurl.cc/GNL6zA   🏞️ 【專題講座】河川治理計畫之訂定與實務   👉 reurl.cc/2Qy9xX    📅 9月20日（六）   🎥 《民主之眼》前導特映   👉 reurl.cc/MzLQYk   ☮️ 2025台北國際和平論壇   👉 reurl.cc/nY43QX   🌃 【台北的光】山豬窟 - 暗之碳的過去與凈之光的未來（含大地餐桌）   👉 reurl.cc/Y3RaMx    📅 9月21日（日）   📰 關於安全的練習-「假新聞製造所」   👉 reurl.cc/qY4R9N   📚 Amnesty Book Club: The Right to Maim   👉 reurl.cc/QaGq15   💻 g0v黑客松69th｜防災韌性X公民科技   👉 reurl.cc/NxLM5x    📅 9月24日（三）   🥂 9月綠色暢聊台北（Green Drinks Taipei）   👉 reurl.cc/4NvV5X    📅 9月27日（六）   🔬 扇形鹽田水域生物公民科學調查工作坊   👉 reurl.cc/pY4Nqe    ⏳ 年度活動預告   ⚡ 永續充電棧｜2025推推茶會   👉 reurl.cc/1O7NjQ   🏙️ 2025桃園市永續能源論壇   👉 reurl.cc/3MpqrO    快標記你的行事曆，和志同道合的夥伴一起學習、行動吧！✨"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        640,
+        48
+      ],
+      "id": "9d3fbc94-16b9-4014-a9ef-b26782a5801b",
+      "name": "Facebook Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "m8OXD8p9OuWNkdeQ",
+          "name": "2025.12.11到期-Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        224,
+        -48
+      ],
+      "id": "5cb53afa-60a6-4412-88f2-fc1328604f00",
+      "name": "Loop Over Items"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "03d45989-45fa-4a4f-85cd-7f2d744aa7f7",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-09-12T08:05:45.044Z",
+      "updatedAt": "2025-09-12T08:05:45.044Z",
+      "role": "workflow:owner",
+      "workflowId": "J0uyFkZjYMtA6Tt0",
+      "projectId": "cDecO21or5jBIoFx"
+    }
+  ],
+  "tags": [
+    {
+      "createdAt": "2025-09-15T09:02:03.147Z",
+      "updatedAt": "2025-09-15T09:02:03.147Z",
+      "id": "QoDPLz3AuHiTgnik",
+      "name": "文案"
+    }
+  ]
+}
