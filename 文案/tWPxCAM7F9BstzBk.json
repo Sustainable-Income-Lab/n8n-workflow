@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-10T06:00:42.099Z",
-  "updatedAt": "2025-09-15T09:02:18.055Z",
+  "updatedAt": "2025-09-16T07:02:48.720Z",
   "id": "tWPxCAM7F9BstzBk",
   "name": "文案主題生成",
   "active": false,
@@ -333,8 +333,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        960,
-        -96
+        640,
+        -704
       ],
       "id": "460e071f-3af9-47ec-9b91-25ec841c2aec",
       "name": "Send a message",
@@ -463,7 +463,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "407987bb-907a-4e0f-88b9-9ef745af36c3",
+  "versionId": "c37975bc-6123-41bf-8d9b-1ce9eba58895",
   "triggerCount": 0,
   "shared": [
     {
