@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-12T08:05:45.044Z",
-  "updatedAt": "2025-09-16T07:03:10.850Z",
+  "updatedAt": "2025-09-22T03:57:29.144Z",
   "id": "J0uyFkZjYMtA6Tt0",
   "name": "FB",
   "active": false,
@@ -101,6 +101,76 @@
       ],
       "id": "5cb53afa-60a6-4412-88f2-fc1328604f00",
       "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-preview-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-preview-image-generation"
+        },
+        "prompt": "幫我生成一張ig發圖用的海報，包含日本農村。上面加上「我愛農村」的文字，調整放在最佳位置，以及大小。",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        192,
+        -274
+      ],
+      "id": "1e1f7f27-506f-47ad-bf53-41bf2302110e",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "5u4RJ2yZTBePGydq",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -272
+      ],
+      "id": "370412ed-d446-4009-8822-398bcb4ba6fb",
+      "name": "Edit Image"
+    },
+    {
+      "parameters": {
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        608,
+        -272
+      ],
+      "id": "161e4072-c3c1-4df1-87de-461aac3a46e7",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "dCZF9Bp5QQZlyGwB",
+          "name": "Google Drive account"
+        }
+      }
     }
   ],
   "connections": {
@@ -109,6 +179,11 @@
         [
           {
             "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate an image",
             "type": "main",
             "index": 0
           }
@@ -148,6 +223,28 @@
           }
         ]
       ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -158,7 +255,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "03d45989-45fa-4a4f-85cd-7f2d744aa7f7",
+  "versionId": "e52128da-d4da-425c-9be5-dccafdb33e13",
   "triggerCount": 0,
   "shared": [
     {
