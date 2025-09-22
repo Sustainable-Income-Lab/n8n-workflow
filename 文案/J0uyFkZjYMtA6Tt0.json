@@ -1,9 +1,9 @@
 {
   "createdAt": "2025-09-12T08:05:45.044Z",
-  "updatedAt": "2025-09-22T09:11:40.610Z",
+  "updatedAt": "2025-09-22T09:13:59.303Z",
   "id": "J0uyFkZjYMtA6Tt0",
   "name": "FB",
-  "active": false,
+  "active": true,
   "isArchived": false,
   "nodes": [
     {
@@ -580,13 +580,20 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
+      "sheetId": 0,
+      "lastRevision": 125,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=125&exportFormat=xlsx"
+    }
+  },
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
   "versionId": "9aeb4d26-ac96-4052-861a-9bdd624acdea",
-  "triggerCount": 0,
+  "triggerCount": 1,
   "shared": [
     {
       "createdAt": "2025-09-12T08:05:45.044Z",
