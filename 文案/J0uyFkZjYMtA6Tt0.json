@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-12T08:05:45.044Z",
-  "updatedAt": "2025-09-22T03:57:29.144Z",
+  "updatedAt": "2025-09-22T09:11:40.610Z",
   "id": "J0uyFkZjYMtA6Tt0",
   "name": "FB",
   "active": false,
@@ -11,8 +11,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -160,
-        -16
+        -256,
+        176
       ],
       "id": "3784239c-8c64-4a40-9119-695f0c703249",
       "name": "When clicking ‘Execute workflow’"
@@ -36,7 +36,8 @@
         "filtersUI": {
           "values": [
             {
-              "lookupColumn": "確認使用"
+              "lookupColumn": "確認使用圖文",
+              "lookupValue": "o"
             }
           ]
         },
@@ -45,8 +46,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        16,
-        -48
+        -32,
+        272
       ],
       "id": "8274f8bd-8485-4ced-b9d0-e9eec5eac3eb",
       "name": "Get row(s) in sheet",
@@ -68,7 +69,7 @@
             "parameter": [
               {
                 "name": "message",
-                "value": "🌟 永續活動報報200期  下週從公民科學、永續發展到國際情勢，各種精彩的講座、工作坊和映演活動等你參與！無論是關心環境、人權、科技還是文化，都能找到屬於你的靈感交流場域～    📅 9月16日（二）   📖 療癒文學系列講座：《長日將盡》裡的科學史與博物學   👉 reurl.cc/K9L1Kj    📅 9月18日（四）   🌐 邁向我們永恆的星球：健康、科技與地球共生   👉 reurl.cc/9nLkdV   🌍 Global Taipei Dialogue XXVII：美台關稅新局面的挑戰與機會   👉 reurl.cc/89LarR    📅 9月19日（五）   🚺 女力覺醒 × 永續行動：從2030 SDGs桌遊看女力影響力   👉 reurl.cc/GNL6zA   🏞️ 【專題講座】河川治理計畫之訂定與實務   👉 reurl.cc/2Qy9xX    📅 9月20日（六）   🎥 《民主之眼》前導特映   👉 reurl.cc/MzLQYk   ☮️ 2025台北國際和平論壇   👉 reurl.cc/nY43QX   🌃 【台北的光】山豬窟 - 暗之碳的過去與凈之光的未來（含大地餐桌）   👉 reurl.cc/Y3RaMx    📅 9月21日（日）   📰 關於安全的練習-「假新聞製造所」   👉 reurl.cc/qY4R9N   📚 Amnesty Book Club: The Right to Maim   👉 reurl.cc/QaGq15   💻 g0v黑客松69th｜防災韌性X公民科技   👉 reurl.cc/NxLM5x    📅 9月24日（三）   🥂 9月綠色暢聊台北（Green Drinks Taipei）   👉 reurl.cc/4NvV5X    📅 9月27日（六）   🔬 扇形鹽田水域生物公民科學調查工作坊   👉 reurl.cc/pY4Nqe    ⏳ 年度活動預告   ⚡ 永續充電棧｜2025推推茶會   👉 reurl.cc/1O7NjQ   🏙️ 2025桃園市永續能源論壇   👉 reurl.cc/3MpqrO    快標記你的行事曆，和志同道合的夥伴一起學習、行動吧！✨"
+                "value": "={{ $json['生成草稿'] }}"
               }
             ]
           }
@@ -77,15 +78,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        640,
-        48
+        416,
+        200
       ],
       "id": "9d3fbc94-16b9-4014-a9ef-b26782a5801b",
       "name": "Facebook Graph API",
       "credentials": {
         "facebookGraphApi": {
-          "id": "m8OXD8p9OuWNkdeQ",
-          "name": "2025.12.11到期-Facebook Graph account"
+          "id": "ndfMkqlIKxbS4WUI",
+          "name": "心智元Facebook Graph account"
         }
       }
     },
@@ -96,8 +97,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        224,
-        -48
+        192,
+        272
       ],
       "id": "5cb53afa-60a6-4412-88f2-fc1328604f00",
       "name": "Loop Over Items"
@@ -117,8 +118,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        192,
-        -274
+        -256,
+        -272
       ],
       "id": "1e1f7f27-506f-47ad-bf53-41bf2302110e",
       "name": "Generate an image",
@@ -136,7 +137,7 @@
       "type": "n8n-nodes-base.editImage",
       "typeVersion": 1,
       "position": [
-        400,
+        -32,
         -272
       ],
       "id": "370412ed-d446-4009-8822-398bcb4ba6fb",
@@ -160,7 +161,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        608,
+        192,
         -272
       ],
       "id": "161e4072-c3c1-4df1-87de-461aac3a46e7",
@@ -171,6 +172,302 @@
           "name": "Google Drive account"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "me",
+        "edge": "photos",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "=source",
+                "value": "data"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        -48
+      ],
+      "id": "73c92e4e-34da-4595-a0f9-fc53adefa7ae",
+      "name": "Facebook Graph API1",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "m8OXD8p9OuWNkdeQ",
+          "name": "2025.12.11到期-115b-Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json['生成圖片連結'] }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -256,
+        -48
+      ],
+      "id": "033aa81c-c8ad-4c12-8e38-6e70bfeea6e1",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "dCZF9Bp5QQZlyGwB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
+          "mode": "list",
+          "cachedResultName": "文案主題規劃表",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "工作表1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $('Get row(s) in sheet').item.json.ID }}",
+            "FB 連結": "=https://www.facebook.com/{{ $json.id }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "主題",
+              "displayName": "主題",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "關鍵字",
+              "displayName": "關鍵字",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "文案風格",
+              "displayName": "文案風格",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "目標受眾",
+              "displayName": "目標受眾",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "字數限制",
+              "displayName": "字數限制",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "輸出平台",
+              "displayName": "輸出平台",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "備註",
+              "displayName": "備註",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "生成草稿",
+              "displayName": "生成草稿",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "圖片風格建議",
+              "displayName": "圖片風格建議",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "確認使用文字圖片建議",
+              "displayName": "確認使用文字圖片建議",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "生成圖片連結",
+              "displayName": "生成圖片連結",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "確認使用圖文",
+              "displayName": "確認使用圖文",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "FB 連結",
+              "displayName": "FB 連結",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        640,
+        272
+      ],
+      "id": "f2d71de3-ece2-4467-9db3-1e49ebf088c6",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ThMzRXqGlQiD6SlA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
+          "mode": "list",
+          "cachedResultName": "文案主題規劃表",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "工作表1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit#gid=0"
+        },
+        "event": "rowUpdate",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        368
+      ],
+      "id": "78caeac9-4aa1-49c6-9396-730aa77c7f95",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "KEFZ6GSo0mGBdxcL",
+          "name": "Google Sheets Trigger account"
+        }
+      }
     }
   ],
   "connections": {
@@ -179,11 +476,6 @@
         [
           {
             "node": "Get row(s) in sheet",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Generate an image",
             "type": "main",
             "index": 0
           }
@@ -217,7 +509,7 @@
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -245,6 +537,44 @@
           }
         ]
       ]
+    },
+    "Facebook Graph API1": {
+      "main": [
+        []
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -255,7 +585,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "e52128da-d4da-425c-9be5-dccafdb33e13",
+  "versionId": "9aeb4d26-ac96-4052-861a-9bdd624acdea",
   "triggerCount": 0,
   "shared": [
     {
