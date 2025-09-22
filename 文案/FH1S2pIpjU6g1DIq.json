@@ -1,9 +1,9 @@
 {
   "createdAt": "2025-09-22T05:55:03.961Z",
-  "updatedAt": "2025-09-22T07:53:51.266Z",
+  "updatedAt": "2025-09-22T09:11:27.868Z",
   "id": "FH1S2pIpjU6g1DIq",
   "name": "圖片生成",
-  "active": false,
+  "active": true,
   "isArchived": false,
   "nodes": [
     {
@@ -11,8 +11,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -416,
-        72
+        -432,
+        0
       ],
       "id": "ab9b2b71-fd11-4ba7-bfff-721d3a8a079c",
       "name": "When clicking ‘Execute workflow’"
@@ -49,8 +49,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -192,
-        72
+        -208,
+        96
       ],
       "id": "8ce5cb44-129a-41fa-a213-714aa9da33f1",
       "name": "Get row(s) in sheet",
@@ -76,8 +76,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        256,
-        0
+        240,
+        24
       ],
       "id": "53fc3ba4-5e4f-472b-aeb8-a3ece9b87033",
       "name": "Generate an image",
@@ -110,8 +110,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        480,
-        0
+        464,
+        24
       ],
       "id": "964ef38c-6cd9-4516-9cf8-ce52adce3fda",
       "name": "Upload file",
@@ -129,8 +129,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        32,
-        72
+        16,
+        96
       ],
       "id": "0752fea0-1faa-4540-8585-d27856c1e6f4",
       "name": "Loop Over Items"
@@ -292,6 +292,16 @@
               "removed": true
             },
             {
+              "id": "FB 連結",
+              "displayName": "FB 連結",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
               "id": "row_number",
               "displayName": "row_number",
               "required": false,
@@ -311,8 +321,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        704,
-        72
+        688,
+        96
       ],
       "id": "0a73d395-5993-437f-a696-6726cede3edd",
       "name": "Update row in sheet",
@@ -334,7 +344,7 @@
       "type": "n8n-nodes-base.editImage",
       "typeVersion": 1,
       "position": [
-        -192,
+        -208,
         -224
       ],
       "id": "dd4e1970-0d15-4610-8cfc-706e20407048",
@@ -355,7 +365,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -416,
+        -432,
         -224
       ],
       "id": "c637738b-6722-4db9-a68f-d8af509e7293",
@@ -382,7 +392,7 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        -416,
+        -432,
         -448
       ],
       "id": "23b61433-6929-4d84-8946-b3df489b16f2",
@@ -391,6 +401,47 @@
         "googlePalmApi": {
           "id": "5u4RJ2yZTBePGydq",
           "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
+          "mode": "list",
+          "cachedResultName": "文案主題規劃表",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "工作表1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit#gid=0"
+        },
+        "event": "rowUpdate",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        192
+      ],
+      "id": "baa805d1-a5ed-4cd7-bcda-4aba3229af42",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "KEFZ6GSo0mGBdxcL",
+          "name": "Google Sheets Trigger account"
         }
       }
     }
@@ -478,18 +529,36 @@
           }
         ]
       ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
+      "sheetId": 0,
+      "lastRevision": 123,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=123&exportFormat=xlsx"
+    }
+  },
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "28fb57bc-ed42-47c7-af3b-b23082360a33",
-  "triggerCount": 0,
+  "versionId": "43f3d8dc-bfe8-48f0-baec-ad9a25e7a71a",
+  "triggerCount": 1,
   "shared": [
     {
       "createdAt": "2025-09-22T05:55:03.961Z",
