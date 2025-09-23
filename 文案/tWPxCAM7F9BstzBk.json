@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-10T06:00:42.099Z",
-  "updatedAt": "2025-09-22T09:11:56.911Z",
+  "updatedAt": "2025-09-23T02:49:24.006Z",
   "id": "tWPxCAM7F9BstzBk",
   "name": "文案主題生成",
   "active": true,
@@ -578,23 +578,15 @@
     "node:Google Sheets Trigger": {
       "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
       "sheetId": 0,
-      "lastRevision": 125,
-      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=125&exportFormat=xlsx"
+      "lastRevision": 188,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=188&exportFormat=xlsx"
     }
   },
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "pinData": {
-    "Question and Answer Chain": [
-      {
-        "json": {
-          "response": "```json\n{\n  \"文案\": \"心智元：經濟永動，購買力魔法無限！\",\n  \"圖片描述建議\": \"一個閃耀著魔法光芒的經濟永動機，象徵無限的購買力與能量循環。\"\n}\n```"
-        }
-      }
-    ]
-  },
-  "versionId": "c359d20a-9922-411b-b5e8-0675672aad68",
+  "pinData": {},
+  "versionId": "d020569c-fb2f-4c16-b3ad-c5b24c380413",
   "triggerCount": 1,
   "shared": [
     {
