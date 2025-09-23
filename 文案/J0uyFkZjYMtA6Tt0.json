@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-12T08:05:45.044Z",
-  "updatedAt": "2025-09-22T09:13:59.303Z",
+  "updatedAt": "2025-09-23T02:59:28.519Z",
   "id": "J0uyFkZjYMtA6Tt0",
   "name": "FB",
   "active": true,
@@ -12,7 +12,7 @@
       "typeVersion": 1,
       "position": [
         -256,
-        176
+        -48
       ],
       "id": "3784239c-8c64-4a40-9119-695f0c703249",
       "name": "When clicking ‘Execute workflow’"
@@ -38,6 +38,9 @@
             {
               "lookupColumn": "確認使用圖文",
               "lookupValue": "o"
+            },
+            {
+              "lookupColumn": "FB 連結"
             }
           ]
         },
@@ -47,7 +50,7 @@
       "typeVersion": 4.7,
       "position": [
         -32,
-        272
+        48
       ],
       "id": "8274f8bd-8485-4ced-b9d0-e9eec5eac3eb",
       "name": "Get row(s) in sheet",
@@ -60,45 +63,13 @@
     },
     {
       "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "me",
-        "edge": "feed",
-        "options": {
-          "queryParameters": {
-            "parameter": [
-              {
-                "name": "message",
-                "value": "={{ $json['生成草稿'] }}"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        416,
-        200
-      ],
-      "id": "9d3fbc94-16b9-4014-a9ef-b26782a5801b",
-      "name": "Facebook Graph API",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "ndfMkqlIKxbS4WUI",
-          "name": "心智元Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "options": {}
       },
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
         192,
-        272
+        48
       ],
       "id": "5cb53afa-60a6-4412-88f2-fc1328604f00",
       "name": "Loop Over Items"
@@ -175,38 +146,6 @@
     },
     {
       "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "me",
-        "edge": "photos",
-        "options": {
-          "queryParameters": {
-            "parameter": [
-              {
-                "name": "=source",
-                "value": "data"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        -32,
-        -48
-      ],
-      "id": "73c92e4e-34da-4595-a0f9-fc53adefa7ae",
-      "name": "Facebook Graph API1",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "m8OXD8p9OuWNkdeQ",
-          "name": "2025.12.11到期-115b-Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "download",
         "fileId": {
           "__rl": true,
@@ -218,8 +157,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -256,
-        -48
+        416,
+        -32
       ],
       "id": "033aa81c-c8ad-4c12-8e38-6e70bfeea6e1",
       "name": "Download file",
@@ -416,8 +355,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        640,
-        272
+        864,
+        48
       ],
       "id": "f2d71de3-ece2-4467-9db3-1e49ebf088c6",
       "name": "Update row in sheet",
@@ -458,7 +397,7 @@
       "typeVersion": 1,
       "position": [
         -256,
-        368
+        144
       ],
       "id": "78caeac9-4aa1-49c6-9396-730aa77c7f95",
       "name": "Google Sheets Trigger",
@@ -466,6 +405,68 @@
         "googleSheetsTriggerOAuth2Api": {
           "id": "KEFZ6GSo0mGBdxcL",
           "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "me",
+        "edge": "photos",
+        "sendBinaryData": true,
+        "binaryPropertyName": "data",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "caption",
+                "value": "={{ $json['生成草稿'] }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        640,
+        -32
+      ],
+      "id": "4cf3e95a-2241-40ea-a90c-7c7ae3c5e065",
+      "name": "Facebook Graph API2",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ndfMkqlIKxbS4WUI",
+          "name": "心智元Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C031VA2BYLF",
+          "mode": "list",
+          "cachedResultName": "githubchannel"
+        },
+        "text": "=一篇貼文已生成\n\nhttps://www.facebook.com/{{ $('Facebook Graph API2').item.json.id }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1072,
+        48
+      ],
+      "id": "ab40d081-ea4d-48af-8ddd-125b09785549",
+      "name": "Send a message",
+      "webhookId": "f1edb8d4-ea4a-41a3-b887-4a72fac0a0e4",
+      "credentials": {
+        "slackApi": {
+          "id": "BZr8glRKeiPLGK6U",
+          "name": "MIC-Slack-Account"
         }
       }
     }
@@ -498,18 +499,7 @@
         [],
         [
           {
-            "node": "Facebook Graph API",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API": {
-      "main": [
-        [
-          {
-            "node": "Update row in sheet",
+            "node": "Download file",
             "type": "main",
             "index": 0
           }
@@ -538,16 +528,11 @@
         ]
       ]
     },
-    "Facebook Graph API1": {
-      "main": [
-        []
-      ]
-    },
     "Download file": {
       "main": [
         [
           {
-            "node": "Facebook Graph API1",
+            "node": "Facebook Graph API2",
             "type": "main",
             "index": 0
           }
@@ -558,7 +543,7 @@
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Send a message",
             "type": "main",
             "index": 0
           }
@@ -575,6 +560,28 @@
           }
         ]
       ]
+    },
+    "Facebook Graph API2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -584,15 +591,15 @@
     "node:Google Sheets Trigger": {
       "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
       "sheetId": 0,
-      "lastRevision": 125,
-      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=125&exportFormat=xlsx"
+      "lastRevision": 188,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=188&exportFormat=xlsx"
     }
   },
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "9aeb4d26-ac96-4052-861a-9bdd624acdea",
+  "versionId": "9a33d4b4-422a-4c4c-ab78-5d3ddf1f5165",
   "triggerCount": 1,
   "shared": [
     {
