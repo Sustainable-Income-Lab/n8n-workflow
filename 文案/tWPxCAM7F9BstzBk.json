@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-10T06:00:42.099Z",
-  "updatedAt": "2025-09-23T02:49:24.006Z",
+  "updatedAt": "2025-10-08T07:25:02.899Z",
   "id": "tWPxCAM7F9BstzBk",
   "name": "文案主題生成",
   "active": true,
@@ -327,6 +327,16 @@
               "removed": true
             },
             {
+              "id": "insight",
+              "displayName": "insight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
               "id": "row_number",
               "displayName": "row_number",
               "required": false,
@@ -360,7 +370,6 @@
     },
     {
       "parameters": {
-        "operation": "sendAndWait",
         "select": "channel",
         "channelId": {
           "__rl": true,
@@ -368,8 +377,8 @@
           "mode": "list",
           "cachedResultName": "githubchannel"
         },
-        "message": "測試",
-        "options": {}
+        "text": "=有新草稿生成，\n請上Google Sheet確認\nhttps://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit?gid=0#gid=0",
+        "otherOptions": {}
       },
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
@@ -578,15 +587,15 @@
     "node:Google Sheets Trigger": {
       "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
       "sheetId": 0,
-      "lastRevision": 188,
-      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=188&exportFormat=xlsx"
+      "lastRevision": 526,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=526&exportFormat=xlsx"
     }
   },
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "d020569c-fb2f-4c16-b3ad-c5b24c380413",
+  "versionId": "07c537c9-2969-45a4-a5c9-9a276fc20647",
   "triggerCount": 1,
   "shared": [
     {
