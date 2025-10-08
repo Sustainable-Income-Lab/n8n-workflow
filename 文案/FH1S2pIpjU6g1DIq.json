@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-22T05:55:03.961Z",
-  "updatedAt": "2025-09-22T09:11:27.868Z",
+  "updatedAt": "2025-10-08T07:25:33.580Z",
   "id": "FH1S2pIpjU6g1DIq",
   "name": "圖片生成",
   "active": true,
@@ -77,7 +77,7 @@
       "typeVersion": 1,
       "position": [
         240,
-        24
+        32
       ],
       "id": "53fc3ba4-5e4f-472b-aeb8-a3ece9b87033",
       "name": "Generate an image",
@@ -111,7 +111,7 @@
       "typeVersion": 3,
       "position": [
         464,
-        24
+        32
       ],
       "id": "964ef38c-6cd9-4516-9cf8-ce52adce3fda",
       "name": "Upload file",
@@ -156,7 +156,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "ID": "={{ $('Loop Over Items').item.json.ID }}",
-            "生成圖片連結": "={{ $json.webViewLink }}"
+            "生成圖片連結": "={{ $json.webViewLink }}",
+            "確認使用文字圖片建議": "Done"
           },
           "matchingColumns": [
             "ID"
@@ -270,7 +271,7 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true,
-              "removed": true
+              "removed": false
             },
             {
               "id": "生成圖片連結",
@@ -294,6 +295,16 @@
             {
               "id": "FB 連結",
               "displayName": "FB 連結",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "insight",
+              "displayName": "insight",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -444,6 +455,34 @@
           "name": "Google Sheets Trigger account"
         }
       }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C031VA2BYLF",
+          "mode": "list",
+          "cachedResultName": "githubchannel"
+        },
+        "text": "有新圖片生成\n\n請上規劃表確認\n\nhttps://docs.google.com/spreadsheets/d/1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM/edit?gid=0#gid=0",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        176,
+        -160
+      ],
+      "id": "a4b004e5-56e9-4b09-9f18-23f54470868c",
+      "name": "Send a message",
+      "webhookId": "7d2e69ac-069b-4f5e-9a47-08bf6f1cff47",
+      "credentials": {
+        "slackApi": {
+          "id": "BZr8glRKeiPLGK6U",
+          "name": "MIC-Slack-Account"
+        }
+      }
     }
   ],
   "connections": {
@@ -482,7 +521,13 @@
     },
     "Loop Over Items": {
       "main": [
-        [],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Generate an image",
@@ -549,15 +594,15 @@
     "node:Google Sheets Trigger": {
       "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
       "sheetId": 0,
-      "lastRevision": 188,
-      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=188&exportFormat=xlsx"
+      "lastRevision": 526,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=526&exportFormat=xlsx"
     }
   },
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "43f3d8dc-bfe8-48f0-baec-ad9a25e7a71a",
+  "versionId": "2a05c3ca-d0b7-4c63-86a9-648e92c4b7ef",
   "triggerCount": 1,
   "shared": [
     {
