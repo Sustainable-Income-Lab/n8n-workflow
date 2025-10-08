@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-09-12T08:05:45.044Z",
-  "updatedAt": "2025-09-23T02:59:28.519Z",
+  "updatedAt": "2025-10-08T07:24:38.792Z",
   "id": "J0uyFkZjYMtA6Tt0",
   "name": "FB",
   "active": true,
@@ -38,9 +38,6 @@
             {
               "lookupColumn": "確認使用圖文",
               "lookupValue": "o"
-            },
-            {
-              "lookupColumn": "FB 連結"
             }
           ]
         },
@@ -190,7 +187,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "ID": "={{ $('Get row(s) in sheet').item.json.ID }}",
-            "FB 連結": "=https://www.facebook.com/{{ $json.id }}"
+            "FB 連結": "=https://www.facebook.com/{{ $json.id }}",
+            "確認使用圖文": "Done"
           },
           "matchingColumns": [
             "ID"
@@ -324,7 +322,7 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true,
-              "removed": true
+              "removed": false
             },
             {
               "id": "FB 連結",
@@ -334,6 +332,16 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true
+            },
+            {
+              "id": "insight",
+              "displayName": "insight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
             },
             {
               "id": "row_number",
@@ -356,7 +364,7 @@
       "typeVersion": 4.7,
       "position": [
         864,
-        48
+        -32
       ],
       "id": "f2d71de3-ece2-4467-9db3-1e49ebf088c6",
       "name": "Update row in sheet",
@@ -457,7 +465,7 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        1072,
+        1088,
         48
       ],
       "id": "ab40d081-ea4d-48af-8ddd-125b09785549",
@@ -591,15 +599,15 @@
     "node:Google Sheets Trigger": {
       "documentId": "1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM",
       "sheetId": 0,
-      "lastRevision": 188,
-      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=188&exportFormat=xlsx"
+      "lastRevision": 526,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1L2aG1su8TDETxXvqAUpgKC_n0WWpaeyRETAwJP0eOUM&revision=526&exportFormat=xlsx"
     }
   },
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "9a33d4b4-422a-4c4c-ab78-5d3ddf1f5165",
+  "versionId": "2a0c3b72-3de5-441f-b9c8-8e01ff77c6bf",
   "triggerCount": 1,
   "shared": [
     {
